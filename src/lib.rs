@@ -271,7 +271,7 @@ impl EmotionEngine {
             "success" | "achievement" | "reward" => Emotion::Joy,
             "cooperation" | "help" => Emotion::Trust,
             "danger" | "threat" | "pain" => Emotion::Fear,
-            "unexpected" | "novelty" => if outcome > 0 { Emotion::Curiosity } else { Emotion::Surprise },
+            "unexpected" | "novelty" => if outcome > 0.0 { Emotion::Curiosity } else { Emotion::Surprise },
             "loss" | "failure" | "miss" => Emotion::Sadness,
             "rejection" | "harm" | "violation" => Emotion::Disgust,
             "blocked" | "obstacle" | "conflict" => Emotion::Frustration,
@@ -335,7 +335,7 @@ mod tests {
     fn test_emotion_engine_frustration() {
         let mut engine = EmotionEngine::new();
         engine.process_event("blocked", 0.8);
-        assert_eq!(engine.modulation.patience < 0.5);
+        assert!(engine.modulation.patience < 0.5);
     }
 
     #[test]
